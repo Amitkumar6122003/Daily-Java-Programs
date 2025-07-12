@@ -1,0 +1,40 @@
+package com.constructorex;
+
+public class Employee {
+	int eid;
+	 String ename;
+	 double salary;
+	 String designation;
+	 String project;
+
+     public Employee(int eid,String ename,double salary, String designation,String project)
+     {
+    	 this.eid=eid;
+    	 this.ename=ename;
+    	 this.salary=salary;
+    	 this.designation=designation;
+    	 this.project=project;
+    	 
+     }
+
+	@Override
+	public String toString() {
+		return "Employee [eid=" + eid + ", ename=" + ename + ", salary=" + salary + ", designation=" + designation
+				+ ", project=" + project + "]";
+	}
+     
+    
+	}
+
+
+package com.constructorex;
+
+public class EmployeeMain {
+
+	public static void main(String[] args) {
+		Employee s = new Employee(7,"pratik",75000,"developer","AI system");
+	
+       System.out.println(s.toString());
+	}
+
+}
