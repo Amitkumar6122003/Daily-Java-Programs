@@ -1,0 +1,15 @@
+package com.loopsdemo;
+
+public class Leap {
+
+	public static void main(String[] args) {
+		for(int i=1930; i<=2025; i++)
+		{
+			if(i%4==0)
+				System.out.println(i+ " ");
+		}
+			
+
+	}
+
+}
