@@ -1,0 +1,40 @@
+class Student {
+    int rollNo;
+    String name;
+    String course;
+
+    Student() {
+        this(0, "Unknown");  
+        System.out.println("Default constructor called");
+    }
+
+    Student(int rollNo, String name) {
+        this.rollNo = rollNo;
+        this.name = name;
+        this.course = "Not Assigned";
+        System.out.println("Two-parameter constructor called");
+    }
+
+    Student(int rollNo, String name, String course) {
+        this(rollNo, name);  
+        this.course = course;
+        System.out.println("Three-parameter constructor called");
+    }
+
+    void display() {
+        System.out.println("Roll No: " + rollNo + ", Name: " + name + ", Course: " + course);
+    }
+}
+
+public class ConstructorChainingDemo {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        s1.display();
+
+        Student s2 = new Student(101, "Amit");
+        s2.display();
+
+        Student s3 = new Student(102, "Kiran", "Java");
+        s3.display();
+    }
+}
