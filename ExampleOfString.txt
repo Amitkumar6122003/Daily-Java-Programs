@@ -1,0 +1,25 @@
+public class StringExample {
+    public static void main(String[] args) {
+        String str1 = "Hello";
+        String str2 = "World";
+        String str3 = new String("Hello");
+
+        System.out.println("str1 equals str2? " + str1.equals(str2));
+        System.out.println("str1 equals str3? " + str1.equals(str3));
+
+        String str4 = str1 + " " + str2;
+        System.out.println("Concatenated String: " + str4);
+
+        System.out.println("Length of str4: " + str4.length());
+        System.out.println("Character at index 1 in str1: " + str1.charAt(1));
+        System.out.println("Substring of str4 (0,5): " + str4.substring(0, 5));
+
+        System.out.println("Uppercase: " + str4.toUpperCase());
+        System.out.println("Lowercase: " + str4.toLowerCase());
+
+        System.out.println("str1 starts with 'He'? " + str1.startsWith("He"));
+        System.out.println("str2 ends with 'ld'? " + str2.endsWith("ld"));
+
+        System.out.println("Replace 'o' with 'a' in str1: " + str1.replace('o', 'a'));
+    }
+}
