@@ -1,0 +1,37 @@
+import java.util.*;
+
+class StringTask {
+    public static void main(String[] args) {
+        String text = "Java is simple but Java is powerful and Java is everywhere";
+        String[] words = text.toLowerCase().split(" ");
+        Map<String,Integer> freq = new HashMap<>();
+        for(String w : words) {
+            freq.put(w, freq.getOrDefault(w,0)+1);
+        }
+        System.out.println("Word Frequency: " + freq);
+
+        String a = "listen";
+        String b = "silent";
+        char[] arr1 = a.toCharArray();
+        char[] arr2 = b.toCharArray();
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        System.out.println("Anagram? " + Arrays.equals(arr1,arr2));
+
+        String input = "abcde";
+        Set<String> permutations = new HashSet<>();
+        permute("", input, permutations);
+        System.out.println("Permutations count: " + permutations.size());
+    }
+
+    static void permute(String prefix, String remaining, Set<String> result) {
+        if(remaining.isEmpty()) result.add(prefix);
+        else {
+            for(int i=0;i<remaining.length();i++) {
+                permute(prefix + remaining.charAt(i), 
+                        remaining.substring(0,i) + remaining.substring(i+1), 
+                        result);
+            }
+        }
+    }
+}
