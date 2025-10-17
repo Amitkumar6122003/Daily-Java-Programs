@@ -1,0 +1,70 @@
+class Engine {
+    final int engineNo;
+    String type;
+
+    Engine(int engineNo, String type) {
+        this.engineNo = engineNo;
+        this.type = type;
+        System.out.println("Engine constructed: " + type + " | No: " + engineNo);
+    }
+
+    void showEngine() {
+        System.out.println("Engine No: " + engineNo + ", Type: " + type);
+    }
+}
+
+class Vehicle {
+    String brand;
+    Engine engine;
+
+    Vehicle(String brand, Engine engine) {
+        this.brand = brand;
+        this.engine = engine;
+        System.out.println("Vehicle constructor called for brand: " + brand);
+    }
+
+    void showVehicle() {
+        System.out.println("Brand: " + brand);
+        engine.showEngine();
+    }
+}
+
+class Car extends Vehicle {
+    String model;
+    double price;
+
+    // Constructor chaining to Vehicle
+    Car(String brand, String model, double price, Engine engine) {
+        super(brand, engine);
+        this.model = model;
+        this.price = price;
+        System.out.println("Car constructor called for model: " + model);
+    }
+
+    // Overloaded constructor
+    Car(String brand, String model, double price, int engineNo, String type) {
+        this(brand, model, price, new Engine(engineNo, type));
+        System.out.println("Car overloaded constructor used");
+    }
+
+    void showCar() {
+        System.out.println("Model: " + model + ", Price: ₹" + price);
+        showVehicle();
+    }
+}
+
+public class ConstructorMaster {
+    public static void main(String[] args) {
+        System.out.println("Creating Car Object with Existing Engine:\n");
+        Engine e1 = new Engine(101, "Diesel");
+        Car c1 = new Car("Tata", "Safari", 1800000, e1);
+
+        System.out.println("\nCreating Car Object with New Engine via Overloaded Constructor:\n");
+        Car c2 = new Car("Mahindra", "Thar", 1700000, 202, "Petrol");
+
+        System.out.println("\nCar Details:");
+        c1.showCar();
+        System.out.println("----------------------");
+        c2.showCar();
+    }
+}
