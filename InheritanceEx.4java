@@ -1,0 +1,99 @@
+class Device {
+    String brand;
+    double price;
+
+    Device(String brand, double price) {
+        this.brand = brand;
+        this.price = price;
+    }
+
+    void displayInfo() {
+        System.out.println("Device Brand: " + brand);
+        System.out.println("Device Price: ₹" + price);
+    }
+
+    void start() {
+        System.out.println("Device starting...");
+    }
+}
+
+class Computer extends Device {
+    int ram;
+    int storage;
+
+    Computer(String brand, double price, int ram, int storage) {
+        super(brand, price);
+        this.ram = ram;
+        this.storage = storage;
+    }
+
+    @Override
+    void displayInfo() {
+        super.displayInfo();
+        System.out.println("RAM: " + ram + "GB");
+        System.out.println("Storage: " + storage + "GB");
+    }
+
+    void start() {
+        System.out.println("Booting up computer...");
+    }
+}
+
+class Laptop extends Computer {
+    double weight;
+    int batteryBackup;
+
+    Laptop(String brand, double price, int ram, int storage, double weight, int batteryBackup) {
+        super(brand, price, ram, storage);
+        this.weight = weight;
+        this.batteryBackup = batteryBackup;
+    }
+
+    @Override
+    void displayInfo() {
+        super.displayInfo();
+        System.out.println("Weight: " + weight + "kg");
+        System.out.println("Battery Backup: " + batteryBackup + " hours");
+    }
+
+    @Override
+    void start() {
+        System.out.println("Opening laptop lid and booting...");
+    }
+}
+
+class GamingLaptop extends Laptop {
+    String gpu;
+    boolean rgbKeyboard;
+
+    GamingLaptop(String brand, double price, int ram, int storage, double weight, int batteryBackup, String gpu, boolean rgbKeyboard) {
+        super(brand, price, ram, storage, weight, batteryBackup);
+        this.gpu = gpu;
+        this.rgbKeyboard = rgbKeyboard;
+    }
+
+    @Override
+    void displayInfo() {
+        super.displayInfo();
+        System.out.println("GPU: " + gpu);
+        System.out.println("RGB Keyboard: " + (rgbKeyboard ? "Yes" : "No"));
+    }
+
+    @Override
+    void start() {
+        System.out.println("Starting gaming laptop with performance mode...");
+    }
+
+    void playGame(String game) {
+        System.out.println("Launching game: " + game + " on " + gpu);
+    }
+}
+
+public class InheritanceDemo {
+    public static void main(String[] args) {
+        GamingLaptop gl = new GamingLaptop("ASUS ROG", 185000, 32, 2000, 2.3, 8, "NVIDIA RTX 4090", true);
+        gl.displayInfo();
+        gl.start();
+        gl.playGame("Cyberpunk 2077");
+    }
+}

@@ -1,0 +1,122 @@
+interface Loanable {
+    void applyLoan(double amount);
+}
+
+abstract class Account {
+    String accountHolder;
+    double balance;
+
+    Account(String accountHolder, double balance) {
+        this.accountHolder = accountHolder;
+        this.balance = balance;
+    }
+
+    abstract void withdraw(double amount);
+
+    void deposit(double amount) {
+        balance += amount;
+        System.out.println(accountHolder + " deposited ₹" + amount);
+    }
+
+    void displayBalance() {
+        System.out.println(accountHolder + " current balance: ₹" + balance);
+    }
+}
+
+class SavingsAccount extends Account implements Loanable {
+    double interestRate;
+
+    SavingsAccount(String accountHolder, double balance, double interestRate) {
+        super(accountHolder, balance);
+        this.interestRate = interestRate;
+    }
+
+    @Override
+    void withdraw(double amount) {
+        if (balance - amount < 1000) {
+            System.out.println("Insufficient balance for withdrawal (Min balance ₹1000)");
+        } else {
+            balance -= amount;
+            System.out.println(accountHolder + " withdrew ₹" + amount);
+        }
+    }
+
+    @Override
+    public void applyLoan(double amount) {
+        System.out.println(accountHolder + " applied for a personal loan of ₹" + amount);
+    }
+
+    void addInterest() {
+        double interest = balance * interestRate / 100;
+        balance += interest;
+        System.out.println("Interest of ₹" + interest + " added.");
+    }
+}
+
+class CurrentAccount extends Account {
+    double overdraftLimit;
+
+    CurrentAccount(String accountHolder, double balance, double overdraftLimit) {
+        super(accountHolder, balance);
+        this.overdraftLimit = overdraftLimit;
+    }
+
+    @Override
+    void withdraw(double amount) {
+        if (balance + overdraftLimit >= amount) {
+            balance -= amount;
+            System.out.println(accountHolder + " withdrew ₹" + amount + " using overdraft.");
+        } else {
+            System.out.println("Withdrawal exceeds overdraft limit!");
+        }
+    }
+
+    void checkOverdraft() {
+        System.out.println("Overdraft limit available: ₹" + overdraftLimit);
+    }
+}
+
+class PremiumAccount extends SavingsAccount {
+    double cashbackPercent;
+
+    PremiumAccount(String accountHolder, double balance, double interestRate, double cashbackPercent) {
+        super(accountHolder, balance, interestRate);
+        this.cashbackPercent = cashbackPercent;
+    }
+
+    @Override
+    void withdraw(double amount) {
+        if (balance - amount >= 5000) {
+            balance -= amount;
+            double cashback = amount * cashbackPercent / 100;
+            balance += cashback;
+            System.out.println(accountHolder + " withdrew ₹" + amount + " and got ₹" + cashback + " cashback!");
+        } else {
+            System.out.println("Minimum ₹5000 balance required!");
+        }
+    }
+
+    void premiumBenefits() {
+        System.out.println(accountHolder + " enjoys premium benefits and priority service.");
+    }
+}
+
+public class BankingInheritance {
+    public static void main(String[] args) {
+        PremiumAccount p1 = new PremiumAccount("Amit Kadam", 80000, 5.5, 2);
+        p1.displayBalance();
+        p1.deposit(5000);
+        p1.withdraw(10000);
+        p1.addInterest();
+        p1.applyLoan(200000);
+        p1.premiumBenefits();
+        p1.displayBalance();
+
+        System.out.println("\n--- Current Account Example ---");
+        CurrentAccount c1 = new CurrentAccount("Snehal Kadam", 30000, 10000);
+        c1.displayBalance();
+        c1.withdraw(35000);
+        c1.checkOverdraft();
+        c1.displayBalance();
+    }
+}
