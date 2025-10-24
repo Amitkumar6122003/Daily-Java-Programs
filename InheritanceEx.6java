@@ -1,0 +1,71 @@
+class Vehicle {
+    int speed;
+    String type;
+
+    Vehicle(int speed, String type) {
+        this.speed = speed;
+        this.type = type;
+        System.out.println("Vehicle constructor called");
+    }
+
+    void display() {
+        System.out.println("Vehicle Type: " + type);
+        System.out.println("Speed: " + speed + " km/h");
+    }
+
+    void fuelType() {
+        System.out.println("Generic vehicle fuel");
+    }
+}
+
+class Car extends Vehicle {
+    String brand;
+    int gears;
+
+    Car(int speed, String type, String brand, int gears) {
+        super(speed, type); 
+        this.brand = brand;
+        this.gears = gears;
+        System.out.println("Car constructor called");
+    }
+
+    @Override
+    void fuelType() {
+        super.fuelType(); 
+        System.out.println("Car uses Petrol or Diesel");
+    }
+
+    void showDetails() {
+        System.out.println("Brand: " + brand);
+        System.out.println("Gears: " + gears);
+    }
+}
+
+class ElectricCar extends Car {
+    int batteryCapacity;
+
+    ElectricCar(int speed, String type, String brand, int gears, int batteryCapacity) {
+        super(speed, type, brand, gears);
+        this.batteryCapacity = batteryCapacity;
+        System.out.println("ElectricCar constructor called");
+    }
+
+    @Override
+    void fuelType() {
+        System.out.println("ElectricCar runs on Battery");
+    }
+
+    void displayAll() {
+        super.display();
+        super.showDetails();
+        System.out.println("Battery Capacity: " + batteryCapacity + " kWh");
+    }
+}
+
+public class InheritanceDemo {
+    public static void main(String[] args) {
+        ElectricCar e = new ElectricCar(150, "Four Wheeler", "Tesla", 1, 100);
+        e.displayAll();
+        e.fuelType();
+    }
+}
