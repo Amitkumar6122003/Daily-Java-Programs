@@ -1,0 +1,101 @@
+abstract class Employee {
+    String name;
+    int id;
+    double salary;
+
+    Employee(String name, int id, double salary) {
+        this.name = name;
+        this.id = id;
+        this.salary = salary;
+    }
+
+    abstract double calculateBonus();
+    abstract void displayRole();
+
+    void displayDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("ID: " + id);
+        System.out.println("Salary: " + salary);
+    }
+}
+
+interface Performance {
+    void evaluatePerformance();
+}
+
+abstract class Manager extends Employee implements Performance {
+    int teamSize;
+
+    Manager(String name, int id, double salary, int teamSize) {
+        super(name, id, salary);
+        this.teamSize = teamSize;
+    }
+
+    void displayTeamSize() {
+        System.out.println("Team Size: " + teamSize);
+    }
+}
+
+class HRManager extends Manager {
+    HRManager(String name, int id, double salary, int teamSize) {
+        super(name, id, salary, teamSize);
+    }
+
+    @Override
+    double calculateBonus() {
+        return salary * 0.20 + teamSize * 500;
+    }
+
+    @Override
+    void displayRole() {
+        System.out.println("Role: Human Resource Manager");
+    }
+
+    @Override
+    public void evaluatePerformance() {
+        System.out.println("Evaluating performance using employee feedback and reports.");
+    }
+}
+
+class ProjectManager extends Manager {
+    int projectsHandled;
+
+    ProjectManager(String name, int id, double salary, int teamSize, int projectsHandled) {
+        super(name, id, salary, teamSize);
+        this.projectsHandled = projectsHandled;
+    }
+
+    @Override
+    double calculateBonus() {
+        return salary * 0.25 + projectsHandled * 1000;
+    }
+
+    @Override
+    void displayRole() {
+        System.out.println("Role: Project Manager");
+    }
+
+    @Override
+    public void evaluatePerformance() {
+        System.out.println("Evaluating performance based on project deadlines and quality metrics.");
+    }
+}
+
+public class AbstractDemo {
+    public static void main(String[] args) {
+        Employee emp1 = new HRManager("Sneha", 101, 75000, 8);
+        Employee emp2 = new ProjectManager("Ravi", 102, 90000, 12, 5);
+
+        emp1.displayDetails();
+        emp1.displayRole();
+        System.out.println("Bonus: " + emp1.calculateBonus());
+        ((Performance) emp1).evaluatePerformance();
+
+        System.out.println("\n-----------------------------\n");
+
+        emp2.displayDetails();
+        emp2.displayRole();
+        System.out.println("Bonus: " + emp2.calculateBonus());
+        ((Performance) emp2).evaluatePerformance();
+    }
+}
